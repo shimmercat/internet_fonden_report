@@ -1,0 +1,5 @@
+---
+shimmercat-devlove:
+    domains:
+        www.cache-digests-report.org:
+            root-dir: build/dirhtml
