@@ -40,6 +40,12 @@ Circulation
 This work can be distributed under the `Creative Commons, Attribution 3.0 Unported
 license <https://creativecommons.org/licenses/by/3.0/legalcode>`_ .
 
+The report is `publicly available at GitHub <https://github.com/shimmercat/internet_fonden_report>`_
+in source form, and published in at the following two internet addresses:
+
+- https://if-report.shimmercat.com/dirhtml/
+- https://shimmercat.github.io/internet_fonden_report/
+
 Your are free to:
 
 * Share -- copy and redistribute the material in any medium or format

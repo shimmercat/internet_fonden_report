@@ -2,7 +2,8 @@
 Data on cache and cache digest sizes
 ====================================
 
-The more fundamental raw data about cache size can be found in the GitHub repository
+The more fundamental raw data about cache size can be found in the
+`GitHub repository <https://github.com/shimmercat/internet_fonden_report>`
 where this report lives.
 
 The data with other statistics, from the third-subsection and onwards, is more bulky
