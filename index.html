@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Report on Cache digests for HTTP/2 Push &mdash; cachedigests_report 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="cachedigests_report 1.0 documentation" href="#" />
+    <link rel="next" title="Introduction" href="intro/" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="report-on-cache-digests-for-http-2-push">
+<h1>Report on Cache digests for HTTP/2 Push<a class="headerlink" href="#report-on-cache-digests-for-http-2-push" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro/">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro/#what-is-this-report">What is this report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/#credits">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/#circulation">Circulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="preliminary_concepts/">Preliminaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preliminary_concepts/#how-much-web-traffic-is-out-there-anyway">How much web traffic is out there anyway?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preliminary_concepts/#for-most-websites-latency-is-the-primary-performance-killer">For most websites, latency is the primary performance killer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preliminary_concepts/#http-2-push-and-cache-digests">HTTP/2 Push and Cache digests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preliminary_concepts/#how-cache-digests-work">How cache digests work</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data/">Data on cache and cache digest sizes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data/#size-of-caches">Size of caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data/#implied-size-of-cache-digests">Implied size of cache digests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data/#data-about-web-page-composition">Data about web-page composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data/#the-possible-impact-of-effective-http-2-push">The possible impact of effective HTTP/2 Push</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="recommendations/">Recommendations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="recommendations/#introduce-cache-digests-in-browser">Introduce cache digests in browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations/#make-it-possible-to-opt-out-of-cache-digests-or-make-them-opt-in">Make it possible to opt-out of cache digests, or make them opt-in</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommendations/#although-not-strictly-needed-scoping-would-be-highly-desirable">Although not strictly needed, scoping would be highly desirable</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex/"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex/"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search/"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Report on Cache digests for HTTP/2 Push</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="intro/" title="next chapter">Introduction</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search/" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Zunzun AB.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

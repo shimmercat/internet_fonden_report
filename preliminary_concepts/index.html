@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Preliminaries &mdash; cachedigests_report 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="cachedigests_report 1.0 documentation" href="../" />
+    <link rel="next" title="Data on cache and cache digest sizes" href="../data/" />
+    <link rel="prev" title="Introduction" href="../intro/" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="preliminaries">
+<h1>Preliminaries<a class="headerlink" href="#preliminaries" title="Permalink to this headline">¶</a></h1>
+<p>To better understand the context in which the HTTP/2 Push technologies
+and cache digests can be employed, we have added some contextual data in
+this section.</p>
+<div class="section" id="how-much-web-traffic-is-out-there-anyway">
+<h2>How much web traffic is out there anyway?<a class="headerlink" href="#how-much-web-traffic-is-out-there-anyway" title="Permalink to this headline">¶</a></h2>
+<p>At the time of this writing, the number of websites is stable around
+<code class="docutils literal"><span class="pre">1</span> <span class="pre">billion</span> <span class="pre">&lt;http://www.internetlivestats.com/total-number-of-websites/&gt;</span></code>_.
+However, people don&#8217;t visit those sites with the same frequency. In
+fact, most traffic goes to just a few sites.</p>
+<p>Here is a table with a few websites that we obtained from
+<code class="docutils literal"><span class="pre">SimilarWeb</span> <span class="pre">&lt;https://www.similarweb.com/&gt;</span></code>_:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="16%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Site</th>
+<th class="head">Rank</th>
+<th class="head">Total visits per month</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>facebook.com</td>
+<td>3</td>
+<td>28e9</td>
+</tr>
+<tr class="row-odd"><td>dictionary.com</td>
+<td>688</td>
+<td>80e6</td>
+</tr>
+<tr class="row-even"><td>python.org</td>
+<td>1788</td>
+<td>22e6</td>
+</tr>
+<tr class="row-odd"><td>gcc.gnu.org</td>
+<td>4743</td>
+<td>2e6</td>
+</tr>
+<tr class="row-even"><td>netcraft.com</td>
+<td>52185</td>
+<td>655e3</td>
+</tr>
+<tr class="row-odd"><td>sphinx.org</td>
+<td>117945</td>
+<td>256e3</td>
+</tr>
+<tr class="row-even"><td>internetfonden.se</td>
+<td>4056955</td>
+<td>3e3</td>
+</tr>
+</tbody>
+</table>
+<p>SimilarWeb provides only estimations, but we compared their estimations
+with some websites to which we have access to the Analytics data and we
+could see that the orders of magnitude were correct in all instances.</p>
+<p>This leads to a simple conclusion: most websites out there don&#8217;t need
+more than one CPU to handle all the traffic that they receive. Or put in
+less controversial terms, for each website out there that needs to load
+balance its traffic between several CPUs, there are a few thousand
+websites that can work fine with a single CPU.</p>
+<p>Other than traffic, there may be other legitimate reasons to distribute the
+servers of a website geographically. One of them is redundancy. But the
+reason that most often network administrators cite is the degradation on
+speed due to network latency.</p>
+</div>
+<div class="section" id="for-most-websites-latency-is-the-primary-performance-killer">
+<h2>For most websites, latency is the primary performance killer<a class="headerlink" href="#for-most-websites-latency-is-the-primary-performance-killer" title="Permalink to this headline">¶</a></h2>
+<p>Latency is the time required by a web request to go from browser to
+server and back. Since browsers often need to request assets in
+sequence, the degradation on performance implied by latency tends to
+amplify itself.</p>
+<p>The fact of latency being the primary performance killer is widely known,
+for two reputable sources, see:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.igvita.com/2012/07/19/latency-the-new-web-performance-bottleneck/">A blog
+post</a>
+from Ilya Grigorik, one of Google&#8217;s performance engineers.</li>
+<li><a class="reference external" href="http://rescomp.stanford.edu/~cheshire/rants/Latency.html">A blog
+post</a>
+from Stuart Cheshire, as far back as 1996</li>
+</ul>
+</div>
+<div class="section" id="http-2-push-and-cache-digests">
+<h2>HTTP/2 Push and Cache digests<a class="headerlink" href="#http-2-push-and-cache-digests" title="Permalink to this headline">¶</a></h2>
+<p>HTTP/2 was approved as an Internet Protocol in 2015 in <a class="reference external" href="https://tools.ietf.org/html/rfc7540">RFC
+7540</a>. HTTP/2 is at its core a
+frames protocol. Frames are part of streams, and streams are identified
+by a number. The stream number is present in each frame as a binary
+field. Streams &#8211; and their numbers &#8211; allow to match requests and
+responses.</p>
+<p>As by RFC 7540, <em>&#8220;HTTP/2 enables a more efficient use of network
+resources and a reduced perception of latency</em>&#8221;. One of the techniques
+that help reduce the effects of latency is HTTP/2 Push. It does so by
+allowing a web server to send resources to a browser before the browser
+gets to request them.</p>
+<p>In order to save network resources when doing HTTP/2 Push, a web server
+should know which assets the browser already has in its cache. Here is
+where cache digests enter. Cache digests were first implemented by
+Kazuho Oku in his H2O server, and then published by him and Mark
+Nottingham as an <a class="reference external" href="https://tools.ietf.org/html/draft-kazuho-h2-cache-digest-00">Internet
+draft</a>.</p>
+</div>
+<div class="section" id="how-cache-digests-work">
+<h2>How cache digests work<a class="headerlink" href="#how-cache-digests-work" title="Permalink to this headline">¶</a></h2>
+<p>The cache digest mechanism is simple: when a browser starts fetching
+a web page, it sends the server a very abridged report of all the files from
+the site that it already has.
+This report is what is called a cache digest.</p>
+<p>The server uses the digest to select what to push.
+That is, if the web page needs a file called <cite>styles.css</cite>, that file is only
+sent when it is not present in the digest.</p>
+<p>The two paragraphs above describe the very high level view.
+The rest of this report contains some data that hopefully will help
+inform decisions concerning this draft.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Preliminaries</a><ul>
+<li><a class="reference internal" href="#how-much-web-traffic-is-out-there-anyway">How much web traffic is out there anyway?</a></li>
+<li><a class="reference internal" href="#for-most-websites-latency-is-the-primary-performance-killer">For most websites, latency is the primary performance killer</a></li>
+<li><a class="reference internal" href="#http-2-push-and-cache-digests">HTTP/2 Push and Cache digests</a></li>
+<li><a class="reference internal" href="#how-cache-digests-work">How cache digests work</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../">Documentation overview</a><ul>
+      <li>Previous: <a href="../intro/" title="previous chapter">Introduction</a></li>
+      <li>Next: <a href="../data/" title="next chapter">Data on cache and cache digest sizes</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/preliminary_concepts.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search/" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Zunzun AB.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="../_sources/preliminary_concepts.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

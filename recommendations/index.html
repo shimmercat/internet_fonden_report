@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Recommendations &mdash; cachedigests_report 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="cachedigests_report 1.0 documentation" href="../" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="recommendations">
+<h1>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h1>
+<p>Most of the recommendations below has been made before in the IETF mailing list
+discussion list.
+See for example: <a class="reference external" href="https://www.ietf.org/mail-archive/web/httpbisa/current/msg26427.html">https://www.ietf.org/mail-archive/web/httpbisa/current/msg26427.html</a> .</p>
+<div class="section" id="introduce-cache-digests-in-browser">
+<h2>Introduce cache digests in browser<a class="headerlink" href="#introduce-cache-digests-in-browser" title="Permalink to this headline">¶</a></h2>
+<p>The current draft is a step in the right direction, and we very much would like it
+seen to completion.</p>
+</div>
+<div class="section" id="make-it-possible-to-opt-out-of-cache-digests-or-make-them-opt-in">
+<h2>Make it possible to opt-out of cache digests, or make them opt-in<a class="headerlink" href="#make-it-possible-to-opt-out-of-cache-digests-or-make-them-opt-in" title="Permalink to this headline">¶</a></h2>
+<p>In some scenarios cache digests could be problematic.
+For example, for domains whose contents evolve rapidly and where
+the number of contents is high.
+The effect of that behavior is that cache digests tend to be big
+and their effectivity low (due to false positives).
+In those scenarios, switching cache digests off would help.</p>
+<p>One very desirable way to make this work is by having the server
+to add a settings in the SETTINGS frame of HTTP/2, or a special HTTP
+header that says what&#8217;s the maximum size that a cache digest
+can reach.</p>
+</div>
+<div class="section" id="although-not-strictly-needed-scoping-would-be-highly-desirable">
+<h2>Although not strictly needed, scoping would be highly desirable<a class="headerlink" href="#although-not-strictly-needed-scoping-would-be-highly-desirable" title="Permalink to this headline">¶</a></h2>
+<p>Scoping is about segregating the digest in compartiments.
+Kazuho for example has proposed to use URL paths to that end.</p>
+<p>As we saw in the &#8220;Data&#8221; section, the typical size today of a cache
+for a given orgin is not so big that size alone be a problem.</p>
+<p>Nevertheless, it is far too easy to find cases where it will be needed.
+For example, if a single domain hosts two different applications,
+it doesn&#8217;t make sense to include assets of one in the cache digest
+of the other.
+Equally if there are &#8220;priority tiers&#8221; in a single application.
+For example, CSS styles are more important than images from the
+perspective of what is needed to render the page first, but a
+large number of images in the cache digest may make the digest
+for the entire site too big or prone to false positives.
+In that situation, segregating the two caches would be a desirable.</p>
+<p>Without scoping, website operators will still require domain
+sharding, a technique that uses different origins as scopes.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Recommendations</a><ul>
+<li><a class="reference internal" href="#introduce-cache-digests-in-browser">Introduce cache digests in browser</a></li>
+<li><a class="reference internal" href="#make-it-possible-to-opt-out-of-cache-digests-or-make-them-opt-in">Make it possible to opt-out of cache digests, or make them opt-in</a></li>
+<li><a class="reference internal" href="#although-not-strictly-needed-scoping-would-be-highly-desirable">Although not strictly needed, scoping would be highly desirable</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/recommendations.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search/" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Zunzun AB.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="../_sources/recommendations.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
